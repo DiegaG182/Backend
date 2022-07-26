@@ -25,7 +25,7 @@ app.set("views", "./views");
 app.post('/productos', (req, res) => {
     const producto = req.body
     productosApi.save(producto)
-    res.redirect('/productos')
+    res.redirect('/')
 })
 
 //Recupera los productos para renderizarlos.
