@@ -8,5 +8,6 @@ express/
 index.js
 productos.txt
 router clase 8.zip
-./api
-plantillas
+./plantillas
+plantillas entrega clase 8.zip
+node_modules
