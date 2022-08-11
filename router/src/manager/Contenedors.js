@@ -60,7 +60,7 @@ class Contenedor{
         if (index == -1) {
             throw new Error(`Error al borrar: no se encontró el id ${id}`)
         }else{
-            console.log(index)
+           
         products.splice(index, 1)
         try {
             await fs.writeFile(this.ruta, JSON.stringify(products, null, 2))
