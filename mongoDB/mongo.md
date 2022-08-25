@@ -67,10 +67,24 @@ El formato de los documentos debe estar en correspondencia con el que venimos ut
     message: "Vamos por la septima"
     }])
 
-//3 - Listar todos los documentos en cada colección.
+<img src= "./images/1 insert 1.png">
+<img src= "./images/1 insert 2.png">
 
-db.products.find()
-db.messages.find()
+<img src= "./images/1 find products.png">
+<img src= "./images/1 find products 2.png">
+
+<img src= "./images/1 insert messages.png">
+<img src= "./images/1 insert messages 2.png">
+
+<img src= "./images/1 find messages 1.png">
+<img src= "./images/1 find messages 2.png">
+
+
+<h1>3 - Listar todos los documentos en cada colección.</h1>
+
+    db.products.find()
+    db.messages.find()
+
 // 4- Mostrar la cantidad de documentos almacenados en cada una de ellas.
 
 db.products.countDocuments()
