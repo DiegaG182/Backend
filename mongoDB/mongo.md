@@ -3,7 +3,7 @@
 El formato de los documentos debe estar en correspondencia con el que venimos utilizando
  en el entregable con base de datos MariaDB. </h1>
 
-![0] (./images/0.png)
+![0] [./images/0.png]
 <H1>
 // 2- Vamos a tener una colección de productos, donde hay que poner valores al campo precio
 // entre los 100 y 5000 pesos(eligiendo valores intermedios, ej: 120, 580, 900, 1280, 1700, 2300, 2860, 3350, 4320, 4990). 
