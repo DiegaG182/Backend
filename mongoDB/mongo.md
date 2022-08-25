@@ -70,55 +70,98 @@ El formato de los documentos debe estar en correspondencia con el que venimos ut
 <img src= "./images/1 insert 1.png">
 <img src= "./images/1 insert 2.png">
 
-<img src= "./images/1 find products.png">
-<img src= "./images/1 find products 2.png">
+
 
 <img src= "./images/1 insert messages.png">
 <img src= "./images/1 insert messages 2.png">
 
-<img src= "./images/1 find messages 1.png">
-<img src= "./images/1 find messages 2.png">
 
 
 <h1>3 - Listar todos los documentos en cada colección.</h1>
 
     db.products.find()
     db.messages.find()
+<img src= "./images/1 find products.png">
+<img src= "./images/1 find products 2.png">
 
-// 4- Mostrar la cantidad de documentos almacenados en cada una de ellas.
+<img src= "./images/1 find messages 1.png">
+<img src= "./images/1 find messages 2.png">
 
-db.products.countDocuments()
-db.messages.countDocuments()
 
-// 5- Realizar un CRUD sobre la colección de productos:
+<h1> 4- Mostrar la cantidad de documentos almacenados en cada una de ellas. </h1>
 
-// 1- Agregar un producto más en la colección de productos 
-db.products.insertOne({name: "Prolongador", price: 150.00 , stock: 35,thumbnail: "foto Prolongador"})
+    db.products.countDocuments()
+    db.messages.countDocuments()
 
-//2-
-//  A. Realizar una consulta por nombre de producto específico:
-db.products.find({name: "Prolongador"})
-//  B. Listar los productos con precio menor a 1000 pesos.
-db.products.find({price: {$lt:1000}})
+<img src= "./images/2 count documents.png">
 
-//  C. Listar los productos con precio entre los 1000 a 3000 pesos.
-db.products.find({price: {$gte:100, $lte:3000}})
 
-//  D. Listar los productos con precio mayor a 3000 pesos.
-db.products.find({price: {$gt:3000}})
+<h1> 5- Realizar un CRUD sobre la colección de productos: </h1>
 
-// 2- Realizar una consulta que traiga sólo el nombre del tercer producto más barato.
-db.products.find({},{name:1,_id:0}).sort({price:1}).skip(2).limit(1)
-// 3- Hacer una actualización sobre todos los productos, 
-// agregando el campo stock a todos ellos con un valor de 100.
+<h2> 5.1- Agregar un producto más en la colección de productos </h2>
 
-db.products.updateMany({stock: {$exists:true}},{$set:{stock:100}})
-db.products.find()
-// 4- Cambiar el stock a cero de los productos con precios mayores a 4000 pesos. 
-db.products.updateMany({price: {$gt:400}},{$set:{stock:0}})
-db.products.find({price: {$gt:400}})
-// 5- Borrar los productos con precio menor a 1000 pesos 
-db.poducts.find({price: {$lt:1000}})
-db.poducts.deleteMany({price: {$lt:1000}})
-db.poducts.find({price: {$lt:1000}})
-</h1>
+    db.products.insertOne({name: "Prolongador", price: 150.00 , stock: 35,thumbnail: "foto Prolongador"})
+
+<img src= "./images/5.1. insert.png">
+
+<h2>5.2-   Realizar una consulta por nombre de producto específico: </h2>
+    db.products.find({name: "Prolongador"})
+
+<img src= "./images/5.2..png">
+
+
+<h2>  A. Listar los productos con precio menor a 1000 pesos. </h2>
+
+    db.products.find({price: {$lt:1000}})
+
+<img src= "./images/5.2.A.png">
+
+
+<h2>  B. Listar los productos con precio entre los 1000 a 3000 pesos. </h2>
+
+    db.products.find({price: {$gte:100, $lte:3000}})
+
+<img src= "./images/5.2.B 1.png">
+<img src= "./images/5.2.B 2.png">
+
+<h2>  C. Listar los productos con precio mayor a 3000 pesos. </h2>
+
+    db.products.find({price: {$gt:3000}})
+
+<img src= "./images/5.2.C.png">
+
+<h2> D- Realizar una consulta que traiga sólo el nombre del tercer producto más barato. </h2>
+
+    db.products.find({},{name:1,_id:0}).sort({price:1}).skip(2).limit(1)
+
+<img src= "./images/5.2.D.png">
+
+<h2> 5.3- Hacer una actualización sobre todos los productos,  
+ agregando el campo stock a todos ellos con un valor de 100. </h2>
+
+    db.products.updateMany({stock: {$exists:true}},{$set:{stock:100}})
+    db.products.find()
+
+<img src= "./images/5.3 1.png">
+<img src= "./images/5.3 2.png">
+<img src= "./images/5.3 3.png">
+
+
+
+<h2> 5.4- Cambiar el stock a cero de los productos con precios mayores a 4000 pesos. </h2>
+
+    db.products.updateMany({price: {$gt:400}},{$set:{stock:0}})
+    db.products.find({price: {$gt:400}})
+
+<img src= "./images/5.4 1.png">
+<img src= "./images/5.4 2.png">
+    
+<h2> 5.5- Borrar los productos con precio menor a 1000 pesos </h2>
+
+    db.poducts.find({price: {$lt:1000}})
+    db.poducts.deleteMany({price: {$lt:1000}})
+    db.poducts.find({price: {$lt:1000}})
+
+<img src= "./images/5.5 0.png">
+<img src= "./images/5.5 1.png">
+<img src= "./images/5.5 2.png">
