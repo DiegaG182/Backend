@@ -3,6 +3,7 @@
 El formato de los documentos debe estar en correspondencia con el que venimos utilizando
  en el entregable con base de datos MariaDB. </h1>
 
+<img src= "./images/0.png">
 ![0] [./images/0.png]
 <H1>
 // 2- Vamos a tener una colección de productos, donde hay que poner valores al campo precio
