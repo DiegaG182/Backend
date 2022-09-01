@@ -1,0 +1,35 @@
+[
+  {
+    "id": "f1baeaa1-27c9-4fd2-8ade-16589955ed57",
+    "timestamp": "2022-08-11T15:17:06+02:00",
+    "products": [
+      {
+        "product": 1,
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "a079b581-b10e-4bee-b259-8b03752a434b",
+    "timestamp": "2022-08-11T15:47:10+02:00",
+    "products": [
+      {
+        "product": 3,
+        "quantity": 1
+      },
+      {
+        "product": 2,
+        "quantity": 5
+      },
+      {
+        "product": 1,
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "9688adbd-f41a-4920-b0ae-5d253e723103",
+    "timestamp": "2022-08-11T18:38:51+02:00",
+    "products": []
+  }
+]
