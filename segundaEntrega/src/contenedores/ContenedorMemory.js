@@ -33,7 +33,8 @@ class ContenedorMemory{
                 throw new Error(`No se encontró el id ${id}`)
             }
     
-        return allObj[index]
+        return {object:allObj[index],objectId: allObj[index].id}
+        
         }catch(err){throw new Error(`Al recuperar : ${err}`)}       
             
     }

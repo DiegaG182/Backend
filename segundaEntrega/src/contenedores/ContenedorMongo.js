@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 import config from '../config.js'
 
-await mongoose.connect(config.mongoDB.connection, config.mongoDB.options);
+await mongoose.connect(config.mongoDB.connection);
 
 class ContenedorMongoDB {
     constructor(collection, schema){
-        this.collection = mongoose.model(collection,schema)
+        this.newSchema = new mongoose.Schema(schema, { timestamps: true })
+        this.collection = mongoose.model(collection,this.newSchema)
     }
 
     async save(newObj){

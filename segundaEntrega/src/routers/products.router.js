@@ -8,10 +8,6 @@ productsRouter.use(express.json())
 productsRouter.use(express.urlencoded({ extended: true }))
 
 
-//Import & Init Products API
-import ProductsApi from '../api/products.api.js'
-const productsApi = new ProductsApi('../src/products.json')
-
 // Autenticacion
 const isAdmin = true;
 const isAuthenticated = function (req,res,next) {

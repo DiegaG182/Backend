@@ -4,7 +4,7 @@ import ContenedorMongo from '../../contenedores/ContenedorMongo.js';
 class ProductsDaoMongo extends ContenedorMongo{
 
     constructor(){
-        super('products',config.products.schema)
+        super('products',config.mongoDB.schema.products)
     }
 
     async save(newObj){
