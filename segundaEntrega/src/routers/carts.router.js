@@ -37,12 +37,13 @@ cartsRouter.delete('/:cId', async (req,res) => {
 //C. Get - Lista productos de un carrito
 cartsRouter.get('/:cId/products', async (req,res) => {
     try{
-        const idC = req.params.cId
+        const idC = req.params.cId    
         const selectedCart = await cartsApi.getById(idC)
+    
         const productsOfCart = await Promise.all(
-             selectedCart.cart.products.map(async (product) => {
+             selectedCart.object.products.map(async (product) => {
                  let p = await productsApi.getById(product.product)
-                 return(p)
+                 return(p.object)
              })
         )
         res.send(productsOfCart)         
@@ -70,7 +71,7 @@ cartsRouter.post('/:cId/products', async (req,res) => {
 
 //E. Delete - borra un producto por Id del carrito especifico por Id
 cartsRouter.delete('/:cId/products/:pId', async (req,res) => {
-    const productToDelete = parseInt(req.params.pId);
+    const productToDelete = req.params.pId;
     const cartId = req.params.cId;
     try{   
         await cartsApi.deleteProductOfCart(cartId,productToDelete);

@@ -25,7 +25,7 @@ const isAuthenticated = function (req,res,next) {
 //Get all Products
 productsRouter.get('/',isAuthenticated, async (req,res,next) => {
    
-    let allProducts =  await productsApi.getAllProducts()
+    let allProducts =  await productsApi.getAll()
                         .then(allProducts=>{return res.send(allProducts)} )
                         .catch(err => {
                             return res.status(400).send({  Description: 'No se pudieron recuperar elementos.',
@@ -36,9 +36,9 @@ productsRouter.get('/',isAuthenticated, async (req,res,next) => {
 
 //Get Product By Id
 productsRouter.get('/:pId', isAuthenticated, async (req,res) => {
-    const id = parseInt(req.params.pId); 
-    let selectedProduct =  await productsApi.getProductById(id)
-                            .then(product=>{return res.send(product);})
+    const id = req.params.pId; 
+    let selectedProduct =  await productsApi.getById(id)
+                            .then(product=>{return res.send(product.object);})
                             .catch(err => {
                                 return res.status(400).send({  Description: 'No se encontro el producto buscado.',
                                                         Error: `${err}`})
@@ -50,7 +50,7 @@ productsRouter.get('/:pId', isAuthenticated, async (req,res) => {
 productsRouter.post('/', isAuthenticated, async (req,res) => {
 
     const newProduct = req.body; 
-    const idProd = await productsApi.saveProduct(newProduct)
+    const idProd = await productsApi.save(newProduct)
                 .then(idNewProduct => {return res.send({id: idNewProduct})})
                 .catch(err => {
                    
@@ -63,9 +63,9 @@ productsRouter.post('/', isAuthenticated, async (req,res) => {
 
 //Update Product By ID
 productsRouter.put('/:pId', isAuthenticated, async (req,res) => {
-    const id = parseInt(req.params.pId); 
+    const id = req.params.pId; 
     const modifyProduct = req.body;
-    await productsApi.updateProductById(id,modifyProduct)
+    await productsApi.updateById(id,modifyProduct)
         .catch(err => {
             return res.status(400).send({  Description: 'No se pudo actualizar el producto.',
                                     Error: `${err}`})
@@ -74,8 +74,9 @@ productsRouter.put('/:pId', isAuthenticated, async (req,res) => {
 })
 
 productsRouter.delete('/:pId', isAuthenticated, async (req,res) => {
-    const id = parseInt(req.params.pId); 
-    await productsApi.deleteProductById(id)
+    const id = req.params.pId; 
+    console.log(id)
+    await productsApi.deleteById(id)
         .catch(err => {
             return res.status(400).send({  Description: 'No se pudo borrar el producto.',
                                     Error: `${err}`})

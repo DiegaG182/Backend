@@ -1,4 +1,4 @@
-import { config } from '../../config.js';
+import config from '../../config.js';
 import ContenedorMongo from '../../contenedores/ContenedorMongo.js';
 
 class ProductsDaoMongo extends ContenedorMongo{
@@ -19,7 +19,7 @@ class ProductsDaoMongo extends ContenedorMongo{
                 }
             }
 
-            super.save(newObj);
+            return super.save(newObj);
 
         }catch(err){throw new Error(`Al Guardar : ${err}`)}    
     }

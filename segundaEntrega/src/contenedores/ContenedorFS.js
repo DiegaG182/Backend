@@ -27,6 +27,7 @@ class ContenedorFS{
     async getAll(){
         try{
             const allObj = await fs.readFile(`${this.route}`,'utf-8');
+            
             return JSON.parse(allObj)   
         }catch(err){
             return [];
@@ -40,8 +41,8 @@ class ContenedorFS{
             if (index == -1) {
                 throw new Error(`No se encontró el id ${id}`)
             }
-    
-        return allObj[index]
+                
+        return {object:allObj[index],objectIndex: index}
         }catch(err){throw new Error(`Al recuperar : ${err}`)}       
             
     }

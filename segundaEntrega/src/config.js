@@ -1,9 +1,11 @@
-export default {
+import mongoose from "mongoose";
+const config = {
     mongoDB: {
         connection: 'mongodb://127.0.0.1:27017/ecommerce',
         schema: { 
             carts: {
-                products: { type: Number, required: true }    
+            //    products: [new Schema({ product: String , quantity: Number })]
+                products: [mongoose.Schema.Types.Mixed]
             },
             products:  {
                 name: { type: String, required: true },
@@ -18,3 +20,5 @@ export default {
     }
 
 }
+
+export default config;

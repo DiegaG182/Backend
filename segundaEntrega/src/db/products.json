@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1f530a85-0612-49be-91ef-15dd93f314af",
+    "timestamp": "2022-09-02T03:22:00+02:00",
+    "name": "Globo Terráqueo a Borrar",
+    "description": "Globo Terráqueo de 60cm de diametro en plastico",
+    "code": "NW43YQ3",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png",
+    "price": 1900,
+    "stock": 2
+  },
+  {
+    "id": "60ad28c7-f5b9-4589-9056-74523394c239",
+    "timestamp": "2022-09-02T03:23:34+02:00",
+    "name": "Escuadra",
+    "description": "Escuadra larga tipo 2",
+    "code": "MF4k6V",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "price": 123.45,
+    "stock": 5
+  },
+  {
+    "id": "be6021a2-fc46-4114-8677-fc9be3fae0f9",
+    "timestamp": "2022-08-11T15:11:49+02:00",
+    "name": "Calculadora",
+    "description": "Calculadora Trasio secundaria",
+    "code": "k3BsMl",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
+    "price": 639.99,
+    "stock": 20
+  }
+]

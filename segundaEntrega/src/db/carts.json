@@ -4,7 +4,7 @@
     "timestamp": "2022-08-11T15:17:06+02:00",
     "products": [
       {
-        "product": 1,
+        "product": "1f530a85-0612-49be-91ef-15dd93f314af",
         "quantity": 4
       }
     ]
@@ -14,15 +14,15 @@
     "timestamp": "2022-08-11T15:47:10+02:00",
     "products": [
       {
-        "product": 3,
+        "product": "be6021a2-fc46-4114-8677-fc9be3fae0f9",
         "quantity": 1
       },
       {
-        "product": 2,
+        "product": "60ad28c7-f5b9-4589-9056-74523394c239",
         "quantity": 5
       },
       {
-        "product": 1,
+        "product": "1f530a85-0612-49be-91ef-15dd93f314af",
         "quantity": 1
       }
     ]
@@ -31,5 +31,15 @@
     "id": "9688adbd-f41a-4920-b0ae-5d253e723103",
     "timestamp": "2022-08-11T18:38:51+02:00",
     "products": []
+  },
+  {
+    "id": "8c0e55cf-3a01-4839-9990-1664ca1adc5a",
+    "timestamp": "2022-09-02T04:02:19+02:00",
+    "products": [
+      {
+        "product": "60ad28c7-f5b9-4589-9056-74523394c239",
+        "quantity": 3
+      }
+    ]
   }
 ]

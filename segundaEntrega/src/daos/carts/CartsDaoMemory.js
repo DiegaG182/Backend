@@ -7,7 +7,7 @@ class CartsDaoMemory extends ContenedorMemory{
     }
 
     async createCart(){
-        super.save([]);
+        return await super.save({products: []});
     }
     
 
@@ -16,17 +16,17 @@ class CartsDaoMemory extends ContenedorMemory{
             
             let allCarts = await this.getAll();
             let searchedCart = await this.getById(cartId).then(cart=>cart)
-            
-            let searchedProductIndex = searchedCart.cart.products.findIndex(product => product.product == productToAdd)
+            console.log(searchedCart)
+            let searchedProductIndex = searchedCart.object.products.findIndex(product => product.product == productToAdd)
             
             //if products of cart are empty, add the new product with cantity 1, otherwise, add 1 to cantity  
             if (searchedProductIndex == -1){
-                searchedCart.cart.products.push({product: productToAdd, quantity: 1 })
+                searchedCart.object.products.push({product: productToAdd, quantity: 1 })
             }else{
-                ++searchedCart.cart.products[searchedProductIndex].quantity
+                ++searchedCart.object.products[searchedProductIndex].quantity
             }
   
-            allCarts[searchedCart.cartIndex] = searchedCart.cart;
+            allCarts[searchedCart.objectIndex] = searchedCart.object;
 
             try {
                 this.data = allCarts
@@ -45,15 +45,15 @@ class CartsDaoMemory extends ContenedorMemory{
             let allCarts = await this.getAll();
             let searchedCart = await this.getById(cartId).then(cart=>cart)
             
-            let searchedProductIndex = searchedCart.cart.products.findIndex(products => products.product == productId)
+            let searchedProductIndex = searchedCart.object.products.findIndex(products => products.product == productId)
             
             if (searchedProductIndex == -1){
                 throw new Error(`No se encontró el id de producto: ${productId}`)
             }
         
-            searchedCart.cart.products.splice(searchedProductIndex,1)
+            searchedCart.object.products.splice(searchedProductIndex,1)
  
-            allCarts[searchedCart.cartIndex] = searchedCart.cart;
+            allCarts[searchedCart.objectIndex] = searchedCart.object;
 
             try {
                 this.data = allCarts

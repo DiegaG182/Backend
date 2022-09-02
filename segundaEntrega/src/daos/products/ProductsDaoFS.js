@@ -4,7 +4,7 @@ import ContenedorFS from '../../contenedores/ContenedorFS.js';
 class ProductsDaoFS extends ContenedorFS{
 
     constructor(){
-        super('../../products.json')
+        super('./src/db/products.json')
     }
 
     async save(newObj){
