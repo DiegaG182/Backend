@@ -16,7 +16,7 @@ class CartsDaoMemory extends ContenedorMemory{
             
             let allCarts = await this.getAll();
             let searchedCart = await this.getById(cartId).then(cart=>cart)
-            console.log(searchedCart)
+            
             let searchedProductIndex = searchedCart.object.products.findIndex(product => product.product == productToAdd)
             
             //if products of cart are empty, add the new product with cantity 1, otherwise, add 1 to cantity  

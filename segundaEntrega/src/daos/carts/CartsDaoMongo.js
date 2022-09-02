@@ -27,7 +27,7 @@ class CartsDaoMongo extends ContenedorMongo{
                 ++searchedCart.object.products[searchedProductIndex].quantity
             }
             console.log(searchedCart.object.products)
-            let result = await this.updateById(cartId, searchedCart.object.products)
+            let result = await this.updateById(cartId, { products: searchedCart.object.products})
             console.log(result)
             }catch (error) {
                 throw new Error(`Al guardar Producto ${productToAdd} al carrito: ${error}`)
@@ -53,7 +53,7 @@ class CartsDaoMongo extends ContenedorMongo{
             searchedCart.object.products.splice(searchedProductIndex,1)
  
             try {
-                await this.updateById(cartId, searchedCart.object.products)
+                await this.updateById(cartId, { products: searchedCart.object.products})
             }catch (error) {
                 throw new Error(`Al Guardar Producto ${productId}: ${error}`)
             }

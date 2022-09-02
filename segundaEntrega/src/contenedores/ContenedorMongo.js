@@ -54,7 +54,7 @@ class ContenedorMongoDB {
     async updateById(id,newObj){
         try {
             
-            const {n,nModified} = await this.collection.replaceOne({'_id': id}, newObj)
+            const {n,nModified} = await this.collection.updateOne({'_id': id}, {$set: newObj})
             
             if (n == 0 || nModified == 0) {
                 throw new Error(`No se encontró el id ${id}`)

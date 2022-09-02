@@ -5,7 +5,7 @@ const config = {
         schema: { 
             carts: {
             //    products: [new Schema({ product: String , quantity: Number })]
-                products: [mongoose.Schema.Types.Mixed]
+                products: { type: [], required: true }
             },
             products:  {
                 name: { type: String, required: true },
