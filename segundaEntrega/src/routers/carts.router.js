@@ -26,7 +26,7 @@ cartsRouter.post('/',async (req,res) => {
 //B. Delete - elimina un carrito
 cartsRouter.delete('/:cId', async (req,res) => {
     let idC = req.params.cId
-    await cartsApi.deleteCartById(idC)
+    await cartsApi.deleteById(idC)
             .catch(err => {
                 res.status(400).send({  Description: 'No se pudo eliminar el carrito.',
                                         Error: `${err}`})
@@ -38,10 +38,10 @@ cartsRouter.delete('/:cId', async (req,res) => {
 cartsRouter.get('/:cId/products', async (req,res) => {
     try{
         const idC = req.params.cId
-        const selectedCart = await cartsApi.getCartById(idC)
+        const selectedCart = await cartsApi.getById(idC)
         const productsOfCart = await Promise.all(
              selectedCart.cart.products.map(async (product) => {
-                 let p = await productsApi.getProductById(product.product)
+                 let p = await productsApi.getById(product.product)
                  return(p)
              })
         )
@@ -58,7 +58,7 @@ cartsRouter.post('/:cId/products', async (req,res) => {
     const productToAddId = req.body.product_Id;
     const cartId = req.params.cId;
     try{
-        await productsApi.getProductById(productToAddId);
+        await productsApi.getById(productToAddId);
         await cartsApi.addProductToCart(cartId,productToAddId);
 
         res.status(201).send()
