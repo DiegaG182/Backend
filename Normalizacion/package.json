@@ -1,0 +1,27 @@
+{
+  "name": "knex",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "run": "nodemon src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "faker": "^5.5.3",
+    "handlebars": "^4.7.7",
+    "knex": "^2.2.0",
+    "mongoose": "^6.5.5",
+    "mysql": "^2.18.1",
+    "node": "^18.7.0",
+    "nodemon": "^2.0.19",
+    "socket.io": "^4.5.1",
+    "sqlite3": "^5.0.11"
+  },
+  "description": ""
+}
