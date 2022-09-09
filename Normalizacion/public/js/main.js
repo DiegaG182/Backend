@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 const socket = io.connect();
 
 
@@ -9,7 +8,7 @@ socket.on('productos', async productos => {
     const html = promesaHtml
     document.getElementById('productos').innerHTML = html;
 });
-
+ 
 function addProduct(e) {
     
     const product = {
@@ -22,17 +21,15 @@ function addProduct(e) {
     return false;
 }
 
-function makeHtmlTable(productos) {
-    return fetch('plantillas/tabla-productos.hbs')
-        .then(respuesta => respuesta.text())
-        .then(plantilla => {
-            const template = Handlebars.compile(plantilla);
-            const html = template({ 
-                productos: productos,
-                hayProductos: productos.length
-            })
-            return html
-        })
+async function makeHtmlTable(productos) {
+    const respuesta = await fetch('plantillas/tabla-productos.hbs');
+    const plantilla = await respuesta.text();
+    const template = Handlebars.compile(plantilla);
+    const html = template({
+        productos: productos,
+        hayProductos: productos.length
+    });
+    return html;
 }
 
 //-------------------------------------------------------------------------------------
@@ -62,7 +59,6 @@ formPublicarMensaje.addEventListener('submit', e => {
 ;
     const message = {
         author:{
-            _id : new mongoose.Types.ObjectId, 
             mail: inputMail.value,
             name: inputName.value,
             lastName: inputLastName.value,
@@ -77,11 +73,11 @@ formPublicarMensaje.addEventListener('submit', e => {
 
 });
 
-socket.on('mensajes', mensajes => {
-    makeHtmlList(mensajes)
+socket.on('mensajes', async mensajes => {
+   await  makeHtmlList(mensajes)
 })
 
-function makeHtmlList(messages) {
+async function makeHtmlList(messages) {
     const html = messages.map((message, index) => {
         return (`<div><strong style="color:blue;">${message.author.id}</strong>
                  <span style="color:brown;">[${message.date}]</span> : 

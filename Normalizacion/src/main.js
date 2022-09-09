@@ -7,6 +7,7 @@ import {optionsSql, optionsSqlite3} from '../sql/options.js'
 import faker from 'faker';
 import config from './config.js';
 import mongoose from 'mongoose';
+import {normalize,schema} from 'normalizr'
 
 /* const mariaDB = knex(options);
 
@@ -44,8 +45,14 @@ app.use(express.static('../public'));
 //const productosApi = new ContenedorProductos(optionsSql,'products')
  
 import ContenedorMongoDB from '../contenedores/ContenedorMongo.js';
-const mensajesApi = new ContenedorMongoDB('messages',config.mongoDB.schema.messages)
-const productosApi = new ContenedorMongoDB('products',config.mongoDB.schema.products)
+import { json } from 'stream/consumers';
+const messagesSchema = new mongoose.Schema(config.mongoDB.schema.message, { timestamps: true })
+const authorsSchema = new mongoose.Schema(config.mongoDB.schema.author, { timestamps: true })
+const messages = mongoose.model('messages',messagesSchema)
+const authors = mongoose.model('authors',authorsSchema)
+const chatApi = new ContenedorMongoDB(messages,messagesSchema);
+const authorApi = new ContenedorMongoDB(authors,authorsSchema);
+const productosApi = new ContenedorMongoDB('products',config.mongoDB.schema.products);
 
 
 //--------------------------------------------
@@ -56,10 +63,10 @@ app.get('/', (req, res) => {
 });
 
 //configuro faker
-faker.locale = "es";
 
-const {commerce,image} = faker
 app.get('/api/productos-test', (req, res) => {
+    faker.locale = "es";
+    const {commerce,image} = faker;
     let fakeProducts = [];
     for (let i = 0; i < 5; i++) {
         fakeProducts.push({
@@ -79,7 +86,7 @@ io.on('connection', async socket => {
 
     // carga inicial de productos
     const productos = await productosApi.getAll().then(productos => productos)
-         
+        
     socket.emit('productos', productos);
     
     // actualizacion de productos
@@ -91,17 +98,42 @@ io.on('connection', async socket => {
     })
 
     // carga inicial de mensajes
-    const mensajes = await mensajesApi.getAll().then(mensajes => mensajes)
+    //const mensajes = await mensajesApi.getAll().then(mensajes => mensajes)
     
     /* socket.emit('mensajes', mensajes); */
     
     // actualizacion de mensajes
     socket.on("new-message",async message =>{
-        console.log(message)
         
-        const result = await mensajesApi.save(message)
-        console.log(result)
-        const mensajes = JSON.parse(JSON.stringify(await mensajesApi.getAll().then(mensajes => mensajes)))
+
+        //const autor = await authorApi.save(message.author)
+        //console.log(autor)
+        /* const findAuthor = await authorApi.getByMail(message.author.mail)
+        let newId;  
+        if (findAuthor == 0){
+            findAuthor = await authorApi.save(message.author)
+        }
+
+        const chat = await chatApi.save({author: findAuthor._id, message: message.message})
+         */
+        //let schemaAuthor =  authorApi.collection.schema
+        //console.log(schemaAuthor)
+        let populate = await chatApi.collection.findById({_id: "631a8fa29ea5d7bdaa3d5e4b"}).populate("authors")
+        //let populated = await chatApi.getPopulated(/* findAuthor._id */ "631a8fa29ea5d7bdaa3d5e4b","authors")
+        //console.log(populate)
+         
+        const authorN = new schema.Entity('authors')
+        const messageN = new schema.Entity('messages',{
+            author:authorN
+        })
+        const normalizedData = normalize(allChats,[messageN])
+        console.log(JSON.stringify(normalizedData, null, '/t'))
+
+
+
+        
+        //console.log(result)
+        //const mensajes = JSON.parse(JSON.stringify(await mensajesApi.getAll().then(mensajes => mensajes)))
         
         /* io.sockets.emit("mensajes", mensajes) */
     

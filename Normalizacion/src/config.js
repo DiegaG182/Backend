@@ -16,10 +16,20 @@ const config = {
                 price: { type: Number, required: true },
                 stock: { type: Number, required: true }
             },
-            messages:  {
-                //_id: { type: mongoose.Types.ObjectId, required: true },
-                message: { type: String, required: true },
-                author: { type: [], required: true}
+            author:  {
+                mail: { type: String, required: true },
+                name: { type: String, required: true },
+                lastName: { type: String, required: true },
+                age: { type: Number, required: true },
+                alias: { type: String, required: true },
+                avatar: { type: String, required: true}
+            },
+            message: {
+                author: {type: mongoose.SchemaTypes.ObjectId,
+                         ref: 'authors'                
+                },
+                message: { type: String, required: true }
+
             }
         }
     }

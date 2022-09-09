@@ -5,8 +5,8 @@ await mongoose.connect(config.mongoDB.connection);
 
 class ContenedorMongoDB {
     constructor(collection, schema){
-        this.newSchema = new mongoose.Schema(schema, { timestamps: true })
-        this.collection = mongoose.model(collection,this.newSchema)
+        this.newSchema = schema
+        this.collection = collection
     }
 
     async save(newObj){
@@ -16,15 +16,15 @@ class ContenedorMongoDB {
             return(result)
         }catch(err){throw new Error(`Al Guardar : ${err}`)}
     }
-    async addMessage(newObj){
+    async getByMail(id) {
         try{
+            let docs = await this.collection.find({'mail' : id},{__v:0});
+            if (docs.length == 0) {
+                return (0)
+            }else{ return (docs[0]);}
             
-           let result = await this.collection.findOneAndUpdate({_id: 'messages'},{ $push: { messages: newObj } }).exec();
-                                
-            return(result)
-        }catch(err){throw new Error(`Al Agregar : ${err}`)}
-    }
-
+        }catch(err){throw new Error(`Al Listar : ${err}`)}
+    }    
 
     async getAll() {
         try{
@@ -40,9 +40,21 @@ class ContenedorMongoDB {
             if (docs.length == 0) {
                 throw new Error(`No se encontró el id ${id}`)
             }
-            //docs.map(d => renameField(d, '_id', 'id'))
+            
             
             return {object:docs[0],docsIndex: 0};
+        }catch(err){throw new Error(`Al Listar : ${err}`)}
+    }
+
+    async getPopulated(id,entity) {
+        try{
+            let docs = await this.collection.find({'_id' : id},{__v:0}).populate(entity);
+            if (docs.length == 0) {
+                throw new Error(`No se encontró el id ${id}`)
+            }
+            
+            return docs[0]
+            
         }catch(err){throw new Error(`Al Listar : ${err}`)}
     }
 
