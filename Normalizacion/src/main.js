@@ -46,12 +46,13 @@ app.use(express.static('../public'));
  
 import ContenedorMongoDB from '../contenedores/ContenedorMongo.js';
 import { json } from 'stream/consumers';
+//probe declarar aca tambien tanto el schema como el model, xq  no me toma el populate
 const messagesSchema = new mongoose.Schema(config.mongoDB.schema.message, { timestamps: true })
 const authorsSchema = new mongoose.Schema(config.mongoDB.schema.author, { timestamps: true })
 const messages = mongoose.model('messages',messagesSchema)
 const authors = mongoose.model('authors',authorsSchema)
-const chatApi = new ContenedorMongoDB(messages,messagesSchema);
-const authorApi = new ContenedorMongoDB(authors,authorsSchema);
+const chatApi = new ContenedorMongoDB('messages',messagesSchema);
+const authorApi = new ContenedorMongoDB('authors',authorsSchema);
 const productosApi = new ContenedorMongoDB('products',config.mongoDB.schema.products);
 
 
@@ -121,13 +122,13 @@ io.on('connection', async socket => {
         let populate = await chatApi.collection.findById({_id: "631a8fa29ea5d7bdaa3d5e4b"}).populate("authors")
         //let populated = await chatApi.getPopulated(/* findAuthor._id */ "631a8fa29ea5d7bdaa3d5e4b","authors")
         //console.log(populate)
-         
-        const authorN = new schema.Entity('authors')
+          
+        /* const authorN = new schema.Entity('authors')
         const messageN = new schema.Entity('messages',{
             author:authorN
         })
         const normalizedData = normalize(allChats,[messageN])
-        console.log(JSON.stringify(normalizedData, null, '/t'))
+        console.log(JSON.stringify(normalizedData, null, '/t')) */
 
 
 
