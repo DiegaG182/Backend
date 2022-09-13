@@ -1,5 +1,5 @@
 {
-  "name": "knex",
+  "name": "normalizr",
   "version": "1.0.0",
   "main": "main.js",
   "type": "module",
@@ -24,5 +24,6 @@
     "socket.io": "^4.5.1",
     "sqlite3": "^5.0.11"
   },
+  "devDependencies": {},
   "description": ""
 }

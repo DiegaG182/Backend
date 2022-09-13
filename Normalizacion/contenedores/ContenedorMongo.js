@@ -5,8 +5,14 @@ await mongoose.connect(config.mongoDB.connection);
 
 class ContenedorMongoDB {
     constructor(collection, schema){
+
         this.newSchema = new mongoose.Schema(schema, { timestamps: true })
         this.collection = mongoose.model(collection,this.newSchema)
+
+        this.newSchema.pre('find', function(){
+            this.populate( 'author' )
+        })
+            
     }
 
     async save(newObj){
@@ -29,7 +35,6 @@ class ContenedorMongoDB {
     async getAll() {
         try{
             let docs = await this.collection.find();
-            //docs.map(d => renameField(d, '_id', 'id'))
             return docs;
         }catch(err){throw new Error(`Al Listar : ${err}`)}
     }
@@ -46,7 +51,7 @@ class ContenedorMongoDB {
         }catch(err){throw new Error(`Al Listar : ${err}`)}
     }
 
-    async getPopulated(id,entity) {
+    /* async getPopulated(id,entity) {
         try{
             let docs = await this.collection.find({'_id' : id},{__v:0}).populate(entity);
             if (docs.length == 0) {
@@ -57,7 +62,7 @@ class ContenedorMongoDB {
             
         }catch(err){throw new Error(`Al Listar : ${err}`)}
     }
-
+ */
     async deleteById(id){
         
         try {

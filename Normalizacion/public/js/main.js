@@ -1,6 +1,5 @@
 const socket = io.connect();
 
-
 //------------------------------------------------------------------------------------
 
 socket.on('productos', async productos => {
