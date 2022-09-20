@@ -1,5 +1,4 @@
 // Register
-console.log("Hola, entra");
 const registerForm = document.getElementById("registerForm");
 registerForm.addEventListener("submit", (e) => {
   e.preventDefault();

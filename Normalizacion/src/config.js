@@ -30,6 +30,17 @@ const config = {
                 },
                 message: { type: String, required: true }
 
+            },
+            chat: {
+                author: {   mail: { type: String, required: true },
+                            name: { type: String, required: true },
+                            lastName: { type: String, required: true },
+                            age: { type: Number, required: true },
+                            alias: { type: String, required: true },
+                            avatar: { type: String, required: true}                
+                },
+                message: { type: String, required: true }
+
             }
         }
     }

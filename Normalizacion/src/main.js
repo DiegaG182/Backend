@@ -8,6 +8,7 @@ import faker from 'faker';
 import config from './config.js';
 import mongoose from 'mongoose';
 import {normalize,schema} from 'normalizr'
+import util from 'util'
 
 /* const mariaDB = knex(options);
 
@@ -47,8 +48,14 @@ app.use(express.static('../public'));
 import ContenedorMongoDB from '../contenedores/ContenedorMongo.js';
 
 //nueva prueba con DAO
-import {AuthorsDao as authorApi, MessagesDao as chatApi} from '../daos/index.js'
+//import {AuthorsDao as authorApi, MessagesDao as chatApi} from '../daos/index.js'
+import {ChatDao as chatApi} from '../daos/index.js';
 const productosApi = new ContenedorMongoDB('products',config.mongoDB.schema.products); 
+
+//--------------------------------------------
+function printNormalized(obj) {
+    console.log(util.inspect(obj,false,12,true))
+}
 
 //--------------------------------------------
 // configuro el socket
@@ -109,23 +116,24 @@ io.on('connection', async socket => {
 
         const chat = await chatApi.save({author: findAuthor._id, message: message.message})
          */
+
+        //const chat = await chatApi.save(message)
         
         let allChats = await chatApi.getAll()
-        console.log(allChats)
+     
           
-        /* const authorN = new schema.Entity('authors')
-        const messageN = new schema.Entity('messages',{
-            author:authorN
-        })
-        
-          const normalizedDatas = normalize(allChats, messageN);
+        const authorSchema = new schema.Entity('author',{},{idAttribute: 'mail'});
+        const messageSchema = new schema.Entity('message',{author:authorSchema}, {idAttribute: '_id'}) ;
+        const chatSchema = new schema.Entity('chat',{
+            messages: [messageSchema]},
+            {idAttribute: 'id'});
+ 
+            /*     console.log(allChats) */
+        const normalizado = {id: 'mensajesANORMALIZAR' , allChats}  
+          const normalizedDatas = normalize(normalizado, messageSchema);
           
-          console.log(JSON.stringify(normalizedDatas, null, '/t')) 
- */
-
-
-    
-        //console.log(result)
+          printNormalized(normalizedDatas)
+          
         //const mensajes = JSON.parse(JSON.stringify(await mensajesApi.getAll().then(mensajes => mensajes)))
         
         /* io.sockets.emit("mensajes", mensajes) */
