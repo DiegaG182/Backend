@@ -8,19 +8,19 @@ const LocalStrategy = local.Strategy
 const router = Router();
 
 router.post('/login',passport.authenticate('login',{failureRedirect:'/api/sessions/loginfail'}),async(req,res)=>{
-
   req.session.user = {
       name:req.user.name,
       email:req.user.email,
       id:req.user._id
   }
-  res.redirect(307, 'http://localhost:8080/');
+  console.log("autenticacion correcta")
+  res.status(200).send({status: "succes", payload: req.session.user});
 });
 
 router.get('/loginfail',(req,res)=>{
   console.log("Error grave")
-  res.status(500).send({status:"error",error:""})
-  res.send("Hay un error grave")
+  res.status(500).send({status:"error",error:"fail"})
+ 
 });
 
 router.get("/current", (req, res) => {

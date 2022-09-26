@@ -1,22 +1,25 @@
 // Login
-const loginForm = document.getElementById("loginForm");
+const loginForm = document.getElementById('loginForm');
 
-loginForm.addEventListener("submit", e => {
-  e.preventDefault();
-  let data = new FormData(loginForm);
-    let obj = {};
-    data.forEach((value,key)=>obj[key]=value);
-    fetch('api/sessions/login',{
-        method:'POST',
-        body:JSON.stringify(obj),
-        headers:{
-            "Content-Type":"application/json"
-        },
-  })
-    .then((result) => result.json())
-    .then((json) => console.log(json))
-    .catch((error) => console.log(error));
-});
+  loginForm.onsubmit = async (e) => {
+    e.preventDefault();
+    
+    try{
+    let response = await fetch('/api/sessions/login',{
+      method: 'POST',
+      body:  JSON.stringify({email:loginForm.email.value,password:loginForm.password.value }),
+      headers:{
+        "Content-Type":"application/json"
+      }
+    });
+    
+    let result = await response.json();
+    console.log(result)
+    }catch{err => console.log("error"+err)}
+    
+  } 
+    
+
 
 // Current Session
 const currentButton = document.getElementById("current");

@@ -7,7 +7,7 @@ import MongoStore from "connect-mongo";
 import viewsRouter from "./routes/views.router.js";
 import sessionsRouter from "./routes/sessions.router.js";
 import authRouter from "./routes/auth.router.js";
-//import initializePassport from './config/passport.config.js';
+import initializePassport from './config/passport.config.js';
 import passport from 'passport';
 
 
@@ -37,14 +37,14 @@ app.use(
 
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
-/* initializePassport();
+initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
- */app.engine("handlebars", handlebars.engine());
+app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use("/", viewsRouter);
-app.use("/api/sessions", sessionsRouter);
+app.use("/api/sessions", sessionsRouter); 
 app.use("/auth",authRouter);
 
 const server = app.listen(8080, () => {

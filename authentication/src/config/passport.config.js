@@ -1,6 +1,6 @@
 import passport from "passport";
 import local from 'passport-local'
-import userService from "../models/User.js";
+import userService from "../models/Users.js";
 import { createHash,isValidPassword } from '../utils.js';
 const LocalStrategy = local.Strategy
 
@@ -12,7 +12,7 @@ const initializePassport = () =>{
         if(!name||!email||!password) return done(null,false,{message:"Incomplete values"})
         //¿El usuario ya está en la base de datos?
         const exists = await userService.findOne({email:email});
-        if(exists) return done(null,false,{message:"Incomplete values"})
+        if(exists) return done(null,false,{message:"user alredy exists!"})
         //Insertamos en la base
         const newUser = {
             name,
@@ -33,11 +33,13 @@ const initializePassport = () =>{
 }
 
 passport.use('login',new LocalStrategy({usernameField:'email'},async(email,password,done)=>{
+ try{    
     if(!email||!password) return done(null,false,{menssage:"incorrect credentioal"})
     let user = await userService.findOne({email:email})
     if(!user) return done(null,false,{menssage:"incorrect credential"})
-    if(!isValidPassword(user,password)) return done(null,false,{menssage:"incorrect credential"})
-    return done(null,user)
-}))
+    if(!await isValidPassword(user,password)) return done(null,false,{menssage:"incorrect credential"})
+    return done(null,user);}
+        catch(error){done(error)}
+ }))
 
 export default initializePassport;
